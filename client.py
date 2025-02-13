@@ -43,17 +43,21 @@ class Client:
         if self.amount > self.balance:
             print("Insuffient funds!")
 
-        elif 10 <= self.amount < 100:
-            self.charges = 1.0
+        else:
+            if 10 <= self.amount < 100:
+            self.charges = 1.00
 
         elif 100 <= self.amount < 1000:
             self.charges = 2.00
 
-        elif self.charges > 1000:
+        elif self.amount > 1000:
             self.charges = 8.00
             
-            self.balance -= self.amount - self.charges
+        else: 
+            self.charges = 0.00
 
+        self.balance -= (self.amount + self.charges)
+            
         print(f"Balance: {self.balance}")
         print()
 
