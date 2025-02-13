@@ -8,14 +8,14 @@ class Client:
         self.balance = 0.00
 
     def enter_pin(self):
-        while True:
+        attempts = 3
+        while attempts > 0:
             try:
                 self.pin = int(input("To access your account, enter four digit pin: "))
                 if len(str(self.pin)) != 4:
                     print("Invalid pin.")
                 else:
                     break
-
             except:
                 print("Invalid pin.")
     
@@ -30,7 +30,7 @@ class Client:
         elif 100 <= self.amount < 1000:
             self.charges = 2.5
 
-        elif self.charges > 1000:
+        elif self.amount > 1000:
             self.charges = 7.5
 
         self.balance += self.amount - self.charges
@@ -62,7 +62,7 @@ class Client:
         print()
 
     def action(self):
-        self.options = ["view balance.", "withdraw.", "deposit", "quit."]
+        self.options = ["view balance", "withdraw", "deposit", "quit"]
         for index, option in enumerate(self.options):
             print(f"{index}: {option}")
         
@@ -71,14 +71,13 @@ class Client:
         while True:
             try:
                 self.choose_option = int(input(f"How can we help you? {list(enumerate(self.options))}: "))
-                if 0 <= self.choose_option < len(self.options):
+                if 0 <= self.choose_index < len(self.options):
+                    self.chosen_index = self.options[self.choose_option]
                     break
                 else:
                     print("Invalid choice, try again.")
             except ValueError:
                 print("Invalid option, enter a number.")
-
-        self.chosen_option = self.options[self.choose_option]    
 
     def bank(self, option):
         if option == "view balance.":
