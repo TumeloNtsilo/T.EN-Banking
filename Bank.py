@@ -14,10 +14,10 @@ def new_account():
             name = input("Enter your full name: ")
             identity_num = int(input("Enter your ID number: "))
             address = input("Enter address in one line with spaces in between: ")
-            if len(str(identity_num)) != 13:
-                print("Invalid ID number.")
-                break
             tittle = input("Enter your tittle Mr, Miss, Ms, Mrs, or other: ")
+            if len(str(identity_num)) != 13 or not identity_num.isdigit():
+                print("Invalid ID number.")
+                break   
         except:
             print("Invalid inputs")
         print()
@@ -27,18 +27,20 @@ def new_account():
             print(x)
         confirmation = input(f"Are your details correct (yes/no)?: ").lower()
         if confirmation == "yes":
+            global client
+            client = Client
+
             print(f"\nHere is your account number: {client.account_num}")
             print(f"Here is your pin number, keep it safe and a secret: {client.pin_number}\n")
+            client_details["name"] = f"{tittle} {name}"
+            client_details["account number"] = client.account_num
+            client_details["pin number"] = client.pin_number
+            bank_clients.append(client_details)
 
         elif confirmation == "no":
             print("Please start over!")
             new_account()
         
-
-        client_details["name"] = f"{tittle} {name}"
-        client_details["account number"] = client.account_num
-        client_details["pin number"] = client.pin_number
-        bank_clients.append(client_details)
         break
 
 def use_account():
@@ -56,6 +58,11 @@ def use_account():
 if __name__ == "__main__":
     bank_name = "T.EN Bank"
     bank_clients = []
+    client = Client()
+
+    greetings()
+    new_account()
+    use_account()
     client = Client()
 
     greetings()
