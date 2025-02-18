@@ -13,6 +13,7 @@ def new_account():
         try:
             name = input("Enter your full name: ")
             identity_num = int(input("Enter your ID number: "))
+            address = input("Enter address in one line with spaces in between: ")
             if len(str(identity_num)) != 13:
                 print("Invalid ID number.")
                 break
@@ -21,10 +22,20 @@ def new_account():
             print("Invalid inputs")
         print()
 
-        print(f"Here is your account number: {client.account_num}")
-        print(f"Here is your pin number, keep it safe and a secret: {client.pin_number}\n")
+        print(f"{tittle} {name}\n{identity_num}")
+        for x in address.split(" "):
+            print(x)
+        confirmation = input(f"Are your details correct (yes/no)?: ").lower()
+        if confirmation == "yes":
+            print(f"\nHere is your account number: {client.account_num}")
+            print(f"Here is your pin number, keep it safe and a secret: {client.pin_number}\n")
 
-        client_details["name"] = name
+        elif confirmation == "no":
+            print("Please start over!")
+            new_account()
+        
+
+        client_details["name"] = f"{tittle} {name}"
         client_details["account number"] = client.account_num
         client_details["pin number"] = client.pin_number
         bank_clients.append(client_details)
