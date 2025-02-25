@@ -38,24 +38,32 @@ class Client:
     
     def deposit(self):
         self.amount = float(input("Enter the amount to deposit: "))
-        if 10 <= self.amount < 100:
-            self.charges = 1.50
+        
+        if self.amount < 0:
+            print("Cannot deposit negative amount.")
+        else:
+            if 10 <= self.amount < 100:
+                self.charges = 1.50
 
-        elif 100 <= self.amount < 1000:
-            self.charges = 2.0
+            elif 100 <= self.amount < 1000:
+                self.charges = 2.0
 
-        elif self.amount > 1000:
-            self.charges = 3.0
+            elif self.amount > 1000:
+                self.charges = 3.0
 
-        self.balance += (self.amount - self.charges)
+            self.balance += (self.amount - self.charges)
 
         print(f"\nbalance: {self.balance}\n")
-    
+        
 
     def withdraw(self):
         self.amount = float(input("Enter the amount you want to withdraw: "))
+
         if self.amount > self.balance:
             print("Insuffient funds!")
+        
+        elif self.amount < 0:
+            print("Cannot withdraw negative amount.")
 
         else:
             if 10 <= self.amount < 100:
