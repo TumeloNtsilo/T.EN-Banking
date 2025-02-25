@@ -29,8 +29,8 @@ class Client:
 
             except:
                 attempts -= 1
-                print("Invalid pin.")
-                print("Finished all attempts")
+                print(f"Invalid pin, {attempts} attempts remaining.")
+    
     
     
     def display_account_details(self):
@@ -42,10 +42,10 @@ class Client:
             self.charges = 1.50
 
         elif 100 <= self.amount < 1000:
-            self.charges = 2.5
+            self.charges = 2.0
 
         elif self.amount > 1000:
-            self.charges = 7.5
+            self.charges = 3.0
 
         self.balance += (self.amount - self.charges)
 
@@ -62,7 +62,7 @@ class Client:
                 self.charges = 1.0
 
             elif 100 <= self.amount < 1000:
-                self.charges = 2.00
+                self.charges = 4.00
 
             elif self.amount > 1000:
                 self.charges = 8.00
@@ -98,6 +98,7 @@ class Client:
 
         elif option == "deposit":
             self.deposit()
+            
 
 
     
