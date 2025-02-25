@@ -17,16 +17,17 @@ def new_account():
             identity_num = int(input("Enter your ID number: "))
             address = input("Enter address in one line with spaces in between: ")
             if len(str(identity_num)) != 13:
-                print("Invalid ID number.")
-                break
-            tittle = input("Enter your tittle Mr, Miss, Ms, Mrs, or other: ")
+                print("Invalid ID number.\nPlease start over.")
+                new_account()
+            else:
+                tittle = input("Enter your tittle Mr, Miss, Ms, Mrs, or other: ")
         except:
             print("Invalid inputs")
 
         print(f"\n{tittle} {name}\n{identity_num}")
         for x in address.split(" "):
             print(x)
-        confirmation = input(f"Are your details correct (yes/no)?: ").lower()
+        confirmation = input(f"\nAre your details correct (yes/no)?: ").lower()
         if confirmation == "yes":
             print(f"\nHere is your account number: {client.account_num}")
             print(f"Here is your pin number, keep it safe and a secret: {client.pin_number}\n")
@@ -51,7 +52,7 @@ def use_account():
     while True:
         client.action()
         if client.chosen_index == "quit":
-            print("Thank you for banking with us.")
+            print("\nThank you for banking with us.")
             break
         client.bank(client.chosen_index)
 
@@ -60,11 +61,6 @@ if __name__ == "__main__":
     bank_name = "T.EN Bank"
     bank_clients = []
     client = Client()
-
-    greetings()
-    new_account()
-    use_account()
-    
 
     greetings()
     new_account()
