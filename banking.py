@@ -1,4 +1,4 @@
-from client import Client
+from bank import Bank
 
 def greetings():
     print(f"Good day and welcome to {bank_name}.\n")
