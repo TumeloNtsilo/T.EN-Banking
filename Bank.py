@@ -6,42 +6,48 @@ def greetings():
 def new_account():
     print(f"Let us open a new account for you.\n")
     client_details = {} 
+    print("Please fill in your information below")
 
     while True:
         try:
             name = input("Enter your full name: ")
-            identity_num = input("Enter your ID number (13 digits): ")
-            address = input("Enter your address in one line with spaces: ")
+            identity_num = int(input("Enter your ID number: "))
+            if len(str(identity_num)) != 13:
+                print("Invalid ID number.\nPlease start over.")
+                continue
 
-            if len(identity_num) != 13 or not identity_num.isdigit():
-                print("Invalid ID number. It must be 13 digits.\n")
-                continue  # Restart loop instead of recursive call
+            tittle = input("Enter your tittle Mr, Miss, Ms, Mrs, or other: ")
+            address = input("Enter address in one line with spaces in between: ")
 
-            title = input("Enter your title (Mr, Miss, Ms, Mrs, or other): ")
-            print(f"\n{title} {name}\nID: {identity_num}")
-            print("\n".join(address.split(" ")))  # Print address parts
-
-            confirmation = input("\nAre your details correct (yes/no)?: ").strip().lower()
+            
+            print(f"\n{tittle} {name}\n{identity_num}")
+            for x in address.split(" "):
+                print(x)
+            confirmation = input(f"\nAre your details correct (yes/no)?: ").lower()
             if confirmation == "yes":
                 break
-            else:
-                print("Please start over.\n")
+                
 
-        except Exception:
-            print("Invalid inputs, please try again.")
+            elif confirmation == "no":
+                print(f"Please start over!\n")
+            
+        except:
+            print("Invalid inputs")
+        
 
-    client_details["name"] = f"{title} {name}"
+    client_details["name"] = f"{tittle} {name}"
     client_details["account number"] = client.account_num
     client_details["pin number"] = client.pin_number
     bank_clients.append(client_details)
 
     print(f"\nHere is your account number: {client.account_num}")
-    print(f"Here is your PIN number. Keep it safe and secret: {client.pin_number}\n")
+    print(f"Here is your pin number, keep it safe and a secret: {client.pin_number}\n")
+
 
 def use_account():
     print(f"\nNow, you can use your account")
 
-    if not client.enter_pin():  # Stop if PIN verification fails
+    if not client.enter_pin(): 
         return
 
     client.display_account_details()
