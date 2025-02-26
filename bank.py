@@ -1,6 +1,6 @@
 import random
 
-class Client:
+class Bank:
     def __init__(self):
         self.account_type = "savings"
         self.account_num = random.randint(10000000, 99999999)
