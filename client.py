@@ -6,7 +6,7 @@ class Client:
         self.account_num = random.randint(10000000, 99999999)
         self.pin_number = random.randint(1000, 9999)
         self.balance = 0.00
-        self.pin_verified = False  # Added flag
+        self.pin_verified = False
 
     def enter_pin(self):
         attempts = 3
@@ -27,7 +27,7 @@ class Client:
                 print("Invalid input. Please enter numbers only.")
 
         print("Too many failed attempts. Access denied.")
-        return False  # Return False when attempts are exhausted
+        return False 
 
     def display_account_details(self):
         print(f"\nAccount number: {self.account_num}\nAccount type: {self.account_type}\n")
